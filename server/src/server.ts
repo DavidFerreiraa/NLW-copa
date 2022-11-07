@@ -7,6 +7,7 @@ const start = async () => {
     })
 
     await fastify.listen({port: 3333})
+    
 
 }
 
