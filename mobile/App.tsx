@@ -10,6 +10,7 @@ import { NativeBaseProvider, Text, Center } from "native-base";
 import { THEME } from "./src/styles/THEME";
 
 import Loading from "./src/components/Loading";
+import { SignIn } from "./src/screens/SignIn";
 
 export default function App() {
 
@@ -17,12 +18,10 @@ export default function App() {
 
     return (
         <NativeBaseProvider theme={THEME}>
-            <Center flex={1} bgColor="gray.900">
-                <Text color="#ffffff" fontSize={24}>
-                    Hello React Native
-                </Text>
-                <StatusBar style="auto" />
-            </Center>
+            {
+                fontsLoaded? <SignIn/> : <Loading/>
+            }
+            <StatusBar style="auto" />
         </NativeBaseProvider>
     );
 }
