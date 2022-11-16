@@ -9,6 +9,8 @@ import { NativeBaseProvider, Text, Center } from "native-base";
 
 import { THEME } from "./src/styles/THEME";
 
+import Loading from "./src/components/Loading";
+
 export default function App() {
 
     const [ fontsLoaded ] = useFonts({ Roboto_400Regular, Roboto_500Medium, Roboto_700Bold});
