@@ -5,13 +5,20 @@ export default function Document() {
         <Html>
             <Head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+                    rel="stylesheet"
+                />
             </Head>
-            <body className='bg-gray-900 bg-app bg-cover bg-no-repeat'>
-                <Main/>
-                <NextScript/>
+            <body className="bg-gray-900 bg-app bg-cover bg-no-repeat">
+                <Main />
+                <NextScript />
             </body>
         </Html>
-    )
+    );
 }
