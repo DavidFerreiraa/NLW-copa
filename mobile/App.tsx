@@ -8,8 +8,8 @@ import { NativeBaseProvider, StatusBar } from "native-base";
 
 import { THEME } from "./src/styles/THEME";
 
-import Loading from "./src/components/Loading";
-import { NewPool } from "./src/screens/NewPool";
+import { Loading } from "./src/components/Loading";
+import { FindPool } from "./src/screens/FindPool";
 import { AuthContextProvider } from "./src/context/AuthContext";
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
     return (
         <NativeBaseProvider theme={THEME}>
             <AuthContextProvider>
-                {fontsLoaded ? <NewPool /> : <Loading />}
+                {fontsLoaded ? <FindPool /> : <Loading />}
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor="transparent"
