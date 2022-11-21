@@ -2,8 +2,12 @@ import { Center, Icon, Text } from "native-base";
 import NLWLogo from "../assets/logo.svg";
 import Button from "../components/Button";
 import { Fontisto } from "@expo/vector-icons";
+import { useAuth } from "../hooks/useAuth";
 
 export function SignIn() {
+
+    const {signIn, isUserLoading, user} = useAuth();
+
     return (
         <Center flex={1} bgColor="gray.900" p={7}>
             <NLWLogo width={212} height={40} />
@@ -19,6 +23,7 @@ export function SignIn() {
                         size="md"
                     />
                 }
+                onPress={signIn}
             />
             <Text
                 fontSize="sm"
