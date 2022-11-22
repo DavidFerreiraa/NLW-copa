@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import jwt from '@fastify/jwt';
 
 import { PrismaClient } from "@prisma/client";
 
@@ -20,6 +21,10 @@ const start = async () => {
 
     await fastify.register(cors, {
         origin: true,
+    });
+
+    await fastify.register(jwt, {
+        secret: process.env.NODE_APP_SECRET_JWT_KEY as string,
     });
 
     await fastify.register(poolRoutes);
