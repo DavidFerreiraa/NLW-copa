@@ -1,6 +1,6 @@
 import { Center, Icon, Text } from "native-base";
 import NLWLogo from "../assets/logo.svg";
-import Button from "../components/Button";
+import { Button } from "../components/Button";
 import { Fontisto } from "@expo/vector-icons";
 import { useAuth } from "../hooks/useAuth";
 
