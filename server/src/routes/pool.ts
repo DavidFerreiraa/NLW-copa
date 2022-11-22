@@ -101,4 +101,40 @@ export async function poolRoutes(fastify: FastifyInstance){
         return response.status(201).send()
     })
 
+    fastify.get("/pools", {onRequest: [authenticate]}, async (request, response) => {
+        const pools = await prisma.pool.findMany({
+            where: {
+                Participant: {
+                    some: {
+                        userId: request.user.sub,
+                    }
+                }
+            }, include: {
+                owner: {
+                    select: {
+                        id: true,
+                        name: true,
+                    }
+                },
+                Participant: {
+                    select: {
+                        id: true,
+                        user: {
+                            select: {
+                                avatarUrl: true,
+                            }
+                        }
+                    },
+                    take: 4,
+                },
+                _count: {
+                    select: {
+                        Participant: true,
+                    }
+                }
+            }
+        })
+        return response.status(200).send(pools)
+    })
+
 }
