@@ -69,4 +69,6 @@ model Guess {
   game          Game        @relation(fields: [gameId], references: [id])
   gameId        String
   participantId String
+
+  @@unique([participantId, gameId]) //Create a unique key between participantId and gameId.
 }
