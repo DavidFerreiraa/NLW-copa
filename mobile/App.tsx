@@ -9,8 +9,8 @@ import { NativeBaseProvider, StatusBar } from "native-base";
 import { THEME } from "./src/styles/THEME";
 
 import { Loading } from "./src/components/Loading";
-import { SignIn } from "./src/screens/SignIn";
 import { AuthContextProvider } from "./src/context/AuthContext";
+import { Routes } from "./src/routes";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
     return (
         <NativeBaseProvider theme={THEME}>
             <AuthContextProvider>
-                {fontsLoaded ? <SignIn /> : <Loading />}
+                {fontsLoaded ? <Routes /> : <Loading />}
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor="transparent"
