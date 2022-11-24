@@ -27,7 +27,7 @@ export function NewPool() {
             toast.show({
                 title: "Seu bolão foi criado com sucesso!",
                 placement: "top",
-                color: "green.500",
+                bgColor: "green.500",
             });
             setTitle("");
         } catch (err) {
@@ -35,7 +35,7 @@ export function NewPool() {
             toast.show({
                 title: "Ops! Não foi possível criar o bolão.",
                 placement: "top",
-                color: "red.500",
+                bgColor: "red.500",
             });
         } finally {
             setIsLoading(false);

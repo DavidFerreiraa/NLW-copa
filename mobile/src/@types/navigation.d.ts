@@ -3,7 +3,7 @@ export declare global {
         interface RootParamList {
             newpool: undefined;
             findpool: undefined;
-            pool: undefined;
+            pools: undefined;
             signin: undefined;
             details: {
                 id: string;
