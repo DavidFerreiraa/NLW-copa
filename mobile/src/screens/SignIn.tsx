@@ -24,6 +24,10 @@ export function SignIn() {
                     />
                 }
                 onPress={signIn}
+                isLoading={isUserLoading}
+                _loading={{ _spinner: {
+                    color: "#ffffff"
+                }}}
             />
             <Text
                 fontSize="sm"

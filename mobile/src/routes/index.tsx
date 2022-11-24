@@ -1,3 +1,4 @@
+import { Box } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { useAuth } from "../hooks/useAuth";
@@ -9,9 +10,11 @@ export function Routes(){
 
     const { user } = useAuth();
 
-    return(
-        <NavigationContainer>
-            { user.name? <AppRoutes/> : <SignIn/> }
-        </NavigationContainer>
-    )
+    return (
+        <Box bgColor="gray.900" flex={1}>
+            <NavigationContainer>
+                {user.name ? <AppRoutes /> : <AppRoutes />}
+            </NavigationContainer>
+        </Box>
+    );
 }
