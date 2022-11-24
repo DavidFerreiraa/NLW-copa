@@ -1,22 +1,45 @@
 import { useState } from "react";
-import { Heading, Text, VStack} from "native-base";
+import { Heading, Text, VStack, useToast } from "native-base";
 import { Header } from "../components/Header";
 import NLWLogo from "../assets/logo.svg";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
-import { AlertModal } from "../components/AlertModal";
+import { api } from "../services/api";
 
 export function NewPool() {
-
     const [title, setTitle] = useState<string>("");
-    const [showModal, setShowModal] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const toast = useToast();
 
     async function handlePoolCreate() {
-
-        if (!title) {
-            setShowModal(true)
+        if (!title.trim()) {
+            //Trim clears all the " " in the string.
+            return toast.show({
+                title: "Ops! Informe um nome para o seu bolão.",
+                placement: "top",
+                bgColor: "red.500",
+            });
         }
 
+        try {
+            setIsLoading(true);
+            await api.post("/pools", { title });
+            toast.show({
+                title: "Seu bolão foi criado com sucesso!",
+                placement: "top",
+                color: "green.500",
+            });
+            setTitle("");
+        } catch (err) {
+            console.log(err);
+            toast.show({
+                title: "Ops! Não foi possível criar o bolão.",
+                placement: "top",
+                color: "red.500",
+            });
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -50,7 +73,6 @@ export function NewPool() {
                     Após criar seu bolão, você receberá um código único que
                     poderá usar para convidar outras pessoas
                 </Text>
-                <AlertModal isOpen={showModal} onClose={setShowModal} />
             </VStack>
         </VStack>
     );
