@@ -26,6 +26,13 @@ export function FindPool() {
             }
 
             await api.post("/pools/join", { code });
+
+            toast.show({
+                    title: "Você entrou no bolão com sucesso!",
+                    placement: "top",
+                    bgColor: "green.500",
+                });
+
             navigate("pools")
 
         } catch (error) {
