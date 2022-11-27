@@ -74,7 +74,7 @@ export function DetailsPool() {
                     <Guesses poolId={poolDetails.id} />
                 </VStack>
             ) : (
-                <EmptyMyPoolList code={poolDetails.code} />
+                <EmptyMyPoolList code={poolDetails.code} onShare={handleShare}/>
             )}
         </VStack>
     );
