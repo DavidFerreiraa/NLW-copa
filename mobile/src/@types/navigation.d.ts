@@ -5,7 +5,7 @@ export declare global {
             findpool: undefined;
             pools: undefined;
             signin: undefined;
-            details: {
+            detailspool: {
                 id: string;
             };
         }

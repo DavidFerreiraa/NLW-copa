@@ -4,6 +4,7 @@ import { Platform } from "react-native";
 import { NewPool } from "../screens/NewPool";
 import { Pools } from "../screens/Pools";
 import { FindPool } from "../screens/FindPool";
+import { DetailsPool } from "../screens/DetailsPool";
 
 import { PlusCircle, SoccerBall } from "phosphor-react-native";
 
@@ -59,6 +60,11 @@ export function AppRoutes() {
                 name="findpool"
                 component={FindPool}
                 options={{ tabBarButton: () => null}}
+            />
+            <Screen
+                name="detailspool"
+                component={DetailsPool}
+                options={{ tabBarButton: () => null }}
             />
         </Navigator>
     );

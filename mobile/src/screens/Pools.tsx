@@ -33,9 +33,11 @@ export function Pools() {
         }
     }
 
-    useFocusEffect(useCallback(() => {
-        fetchPools();
-    }, []));
+    useFocusEffect(
+        useCallback(() => {
+            fetchPools();
+        }, [])
+    );
 
     return (
         <VStack flex={1} bgColor="gray.900">
@@ -69,7 +71,14 @@ export function Pools() {
                 <FlatList
                     data={pools}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => <PoolCard data={item} />}
+                    renderItem={({ item }) => (
+                        <PoolCard
+                            data={item}
+                            onPress={() => {
+                                navigate("detailspool", { id: item.id });
+                            }}
+                        />
+                    )}
                     ListEmptyComponent={() => <EmptyPoolList />}
                     px={5}
                     showsVerticalScrollIndicator={false}

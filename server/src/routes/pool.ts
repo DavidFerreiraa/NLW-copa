@@ -153,7 +153,7 @@ export async function poolRoutes(fastify: FastifyInstance){
                     select: {
                         id: true,
                         name: true,
-                    }
+                    },
                 },
                 Participant: {
                     select: {
@@ -161,18 +161,18 @@ export async function poolRoutes(fastify: FastifyInstance){
                         user: {
                             select: {
                                 avatarUrl: true,
-                            }
-                        }
+                            },
+                        },
                     },
                     take: 4,
                 },
                 _count: {
                     select: {
                         Participant: true,
-                    }
-                }
-            }
-        })
+                    },
+                },
+            },
+        });
         
         return { pool }
     })
