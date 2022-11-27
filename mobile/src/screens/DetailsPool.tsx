@@ -50,7 +50,7 @@ export function DetailsPool() {
     async function handleShare() {
         await Share.share({
             message: poolDetails.code,
-        })
+        });
     }
 
     useEffect(() => {
@@ -71,10 +71,10 @@ export function DetailsPool() {
                         <Option title="Seus palpites" isSelected={optionSelected === 'guess'} onPress={() => setOptionSelected('guess')}/>
                         <Option title="Ranking do grupo" isSelected={optionSelected === 'ranking'} onPress={() => setOptionSelected('ranking')}/>
                     </HStack>
-                    <Guesses poolId={poolDetails.id} />
+                    <Guesses poolId={poolDetails.id} code={poolDetails.code}/>
                 </VStack>
             ) : (
-                <EmptyMyPoolList code={poolDetails.code} onShare={handleShare}/>
+                <EmptyMyPoolList code={poolDetails.code} />
             )}
         </VStack>
     );

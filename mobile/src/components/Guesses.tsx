@@ -1,14 +1,19 @@
 import { GrantType } from "expo-auth-session";
 import { useToast, FlatList } from "native-base";
+import { ItemClick } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types";
 import { useEffect, useState } from "react";
+import { Share } from "react-native";
 import { api } from "../services/api";
+import { EmptyMyPoolList } from "./EmptyMyPoolList";
 import { Game, GameProps } from "./Game";
+import { Loading } from "./Loading";
 
 interface Props {
     poolId: string;
+    code: string;
 }
 
-export function Guesses({ poolId }: Props) {
+export function Guesses({ poolId, code }: Props) {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ firstTeamPoints, setFirstTeamPoints ] = useState<string>('')
     const [ secondTeamPoints, setSecondTeamPoints] = useState<string>('');
@@ -107,6 +112,10 @@ export function Guesses({ poolId }: Props) {
         fetchGames();
     }, [poolId]);
 
+    if(isLoading){
+        <Loading />
+    }
+
     return (
         <FlatList
             data={games}
@@ -119,7 +128,9 @@ export function Guesses({ poolId }: Props) {
                     onGuessConfirm={() => handleGuessConfirm(item.id)}
                     isLoading={isLoading}
                 />
-            )}
+            )
+        }
+            ListEmptyComponent={() => <EmptyMyPoolList code={code}/>}
         />
     );
 }
