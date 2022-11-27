@@ -1,12 +1,14 @@
 import { useRoute } from "@react-navigation/native";
-import { HStack, useToast, VStack } from "native-base";
+import { FlatList, HStack, useToast, VStack } from "native-base";
 import { useEffect, useState } from "react";
 import { Share } from "react-native";
 import { EmptyMyPoolList } from "../components/EmptyMyPoolList";
+import { EmptyRakingList } from "../components/EmptyRakingList";
 import { Guesses } from "../components/Guesses";
 import { Header } from "../components/Header";
 import { Loading } from "../components/Loading";
 import { Option } from "../components/Option";
+import { ParticipantRankCard } from "../components/ParticipantRankCard";
 import { PoolCardPros } from "../components/PoolCard";
 import { PoolHeader } from "../components/PoolHeader";
 import { api } from "../services/api";
@@ -16,9 +18,10 @@ interface RouteParams {
 }
 
 export function DetailsPool() {
-
-    const [optionSelected, setOptionSelected] = useState<'guess' | 'ranking'>('guess')
-    const [isLoading, setIsLoading] = useState(true);
+    const [optionSelected, setOptionSelected] = useState<"guess" | "ranking">(
+        "guess"
+    );
+    const [isLoading, setIsLoading] = useState(false);
     const [poolDetails, setPoolDetails] = useState<PoolCardPros>(
         {} as PoolCardPros
     );
@@ -60,18 +63,45 @@ export function DetailsPool() {
     if (isLoading) {
         return <Loading />;
     }
-
+    
     return (
         <VStack flex={1} bgColor="gray.900">
-            <Header title={poolDetails.title} showBackButton showShareButton onShare={handleShare}/>
+            <Header
+                title={poolDetails.title}
+                showBackButton
+                showShareButton
+                onShare={handleShare}
+            />
             {poolDetails._count?.Participant > 0 ? (
                 <VStack px={5} flex={1}>
                     <PoolHeader data={poolDetails} />
                     <HStack bgColor="gray.800" p={1} rounded="sm" mb={5}>
-                        <Option title="Seus palpites" isSelected={optionSelected === 'guess'} onPress={() => setOptionSelected('guess')}/>
-                        <Option title="Ranking do grupo" isSelected={optionSelected === 'ranking'} onPress={() => setOptionSelected('ranking')}/>
+                        <Option
+                            title="Seus palpites"
+                            isSelected={optionSelected === "guess"}
+                            onPress={() => setOptionSelected("guess")}
+                        />
+                        <Option
+                            title="Ranking do grupo"
+                            isSelected={optionSelected === "ranking"}
+                            onPress={() => setOptionSelected("ranking")}
+                        />
                     </HStack>
-                    <Guesses poolId={poolDetails.id} code={poolDetails.code}/>
+                    {optionSelected === "guess" ? (
+                        <Guesses
+                            poolId={poolDetails.id}
+                            code={poolDetails.code}
+                        />
+                    ) : (
+                        <FlatList
+                            data={poolDetails.Participant}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item }) => (
+                                <ParticipantRankCard participant={item}/>
+                            )}
+                            ListEmptyComponent={() => <EmptyRakingList/>}
+                        />
+                    )}
                 </VStack>
             ) : (
                 <EmptyMyPoolList code={poolDetails.code} />

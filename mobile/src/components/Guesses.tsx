@@ -113,7 +113,7 @@ export function Guesses({ poolId, code }: Props) {
     }, [poolId]);
 
     if(isLoading){
-        <Loading />
+        return <Loading />
     }
 
     return (
