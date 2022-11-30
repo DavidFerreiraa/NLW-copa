@@ -1,5 +1,5 @@
 import { Button, HStack, Text, useTheme, useToast, VStack } from "native-base";
-import { X, Check } from "phosphor-react-native";
+import { X, Check, Plus} from "phosphor-react-native";
 import { getName } from "country-list";
 import dayjs from "dayjs";
 import ptBR from "dayjs/locale/pt-br";
@@ -31,6 +31,7 @@ interface Props {
     data: GameProps;
     onGuessConfirm: () => void;
     isLoading: boolean;
+    isOwner: boolean;
     poolId: string;
     gameId: string;
 }
@@ -39,6 +40,7 @@ export function Game({
     data,
     onGuessConfirm,
     isLoading,
+    isOwner,
     poolId,
     gameId,
 }: Props) {
@@ -179,7 +181,7 @@ export function Game({
                     mt={4}
                     onPress={async () => {
                         await handleGuessConfirm(poolId, gameId),
-                        onGuessConfirm()
+                            onGuessConfirm();
                     }}
                     isLoading={isLoading}
                     isDisabled={isPassed}
@@ -195,6 +197,32 @@ export function Game({
                         </Text>
 
                         <Check color={colors.white} size={sizes[4]} />
+                    </HStack>
+                </Button>
+            )}
+            {isPassed && isOwner && (
+                <Button
+                    size="xs"
+                    w="full"
+                    bgColor="gray.500"
+                    mt={4}
+                    onPress={() => {
+
+                    }}
+                    isLoading={isLoading}
+                    isDisabled={!isPassed}
+                >
+                    <HStack alignItems="center">
+                        <Text
+                            color="white"
+                            fontSize="xs"
+                            fontFamily="heading"
+                            mr={3}
+                        >
+                            ADICIONAR RESULTADOS
+                        </Text>
+
+                        <Plus color={colors.white} size={sizes[4]} />
                     </HStack>
                 </Button>
             )}

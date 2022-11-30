@@ -1,5 +1,6 @@
 import { useToast, FlatList } from "native-base";
 import { useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api";
 import { EmptyMyPoolList } from "./EmptyMyPoolList";
 import { Game, GameProps } from "./Game";
@@ -8,11 +9,14 @@ import { Loading } from "./Loading";
 interface Props {
     poolId: string;
     code: string;
+    ownerId: string;
 }
 
-export function Guesses({ poolId, code }: Props) {
+export function Guesses({ poolId, code, ownerId }: Props) {
+
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ games, setGames ] = useState<GameProps[]>([]);
+    const { user } = useAuth();
 
     const toast = useToast();
 
@@ -55,6 +59,7 @@ export function Guesses({ poolId, code }: Props) {
                     poolId={poolId}
                     gameId={item.id}
                     isLoading={isLoading}
+                    isOwner={user.sub === ownerId}
                 />
             )
         }

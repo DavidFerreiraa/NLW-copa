@@ -3,9 +3,10 @@ import { ParticipantProps } from "./Participants";
 
 interface RankCardProps {
     participant: ParticipantProps;
+    position: number;
 }
 
-export function ParticipantRankCard({participant}: RankCardProps){
+export function ParticipantRankCard({participant, position}: RankCardProps){
     return (
         <HStack
             flex={1}
@@ -30,11 +31,15 @@ export function ParticipantRankCard({participant}: RankCardProps){
                 borderColor="gray.800"
             />
             <VStack flexDirection="column">
-                <Text color="gray.100">{participant.user.name}</Text>
-                <Text color="gray.300">36 pontos</Text>
+                <Text color="gray.100" textAlign="center">
+                    {participant.user.name}
+                </Text>
+                <Text color="gray.300" textAlign="center">
+                    {participant.points} ponto(s)
+                </Text>
             </VStack>
             <Center rounded="lg" w="10" bgColor="yellow.500">
-                <Text>1°</Text>
+                <Text>{position}º</Text>
             </Center>
         </HStack>
     );

@@ -164,6 +164,7 @@ export async function poolRoutes(fastify: FastifyInstance){
                                 name: true,
                             },
                         },
+                        points: true,
                     },
                     take: 4,
                 },

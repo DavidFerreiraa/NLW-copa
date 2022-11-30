@@ -6,6 +6,7 @@ export interface ParticipantProps {
     name: string;
     avatarUrl: string;
   };
+  points: number;
 };
 
 interface Props {

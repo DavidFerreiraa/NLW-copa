@@ -31,6 +31,7 @@ model Participant {
   userId String
   poolId String
 
+  points Int @default(0)
   guesses Guess[]
   user    User    @relation(fields: [userId], references: [id])
   pool    Pool    @relation(fields: [poolId], references: [id])

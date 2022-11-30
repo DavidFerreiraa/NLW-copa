@@ -63,7 +63,7 @@ export function DetailsPool() {
     if (isLoading) {
         return <Loading />;
     }
-    
+
     return (
         <VStack flex={1} bgColor="gray.900">
             <Header
@@ -91,13 +91,14 @@ export function DetailsPool() {
                         <Guesses
                             poolId={poolDetails.id}
                             code={poolDetails.code}
+                            ownerId={poolDetails.ownerId}
                         />
                     ) : (
                         <FlatList
                             data={poolDetails.Participant}
                             keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
-                                <ParticipantRankCard participant={item}/>
+                            renderItem={({ item, index }) => (
+                                <ParticipantRankCard participant={item} position={index + 1} />
                             )}
                             ListEmptyComponent={() => <EmptyRakingList/>}
                         />
