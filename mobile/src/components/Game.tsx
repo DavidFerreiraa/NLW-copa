@@ -118,6 +118,35 @@ export function Game({
         }
     }
 
+    async function handleAddResult(gameId: string){
+        try {
+            if (!firstTeamPoints.trim() || !secondTeamPoints.trim()) {
+                return toast.show({
+                    title: "Informe o resultado para ambos os times!",
+                    placement: "top",
+                    bgColor: "yellow.500",
+                });
+            }
+
+            await api.post(`/pools/games/${gameId}`, {
+                firstTeamPointsFinalResult: Number(firstTeamPoints),
+                secondTeamPointsFinalResult: Number(secondTeamPoints),
+            });
+
+            toast.show({
+                title: "Resultado adicionado!",
+                placement: "top",
+                bgColor: "green.500",
+            });
+        } catch (error) {
+            toast.show({
+                title: "Não foi possível enviar o resultado.",
+                placement: "top",
+                bgColor: "red.500",
+            });
+        }
+    }
+
     return (
         <VStack
             w="full"
@@ -207,7 +236,7 @@ export function Game({
                     bgColor="gray.500"
                     mt={4}
                     onPress={() => {
-
+                        handleAddResult(gameId)
                     }}
                     isLoading={isLoading}
                     isDisabled={!isPassed}

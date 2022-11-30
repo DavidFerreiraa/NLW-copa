@@ -37,4 +37,46 @@ export async function gameRoutes(fastify: FastifyInstance) {
         }) }
 
     })
+
+    fastify.post(
+        "/pools/games/:gameId",
+        { onRequest: [authenticate] },
+        async (request, response) => {
+            const getGameParams = z.object({
+                gameId: z.string(),
+            });
+
+            const createGameBody = z.object({
+                firstTeamPointsFinalResult: z.number(),
+                secondTeamPointsFinalResult: z.number(),
+            });
+
+            const { gameId } = getGameParams.parse(request.params);
+            const { firstTeamPointsFinalResult, secondTeamPointsFinalResult } = createGameBody.parse(request.body)
+
+            const game = await prisma.game.findUnique({
+                where: {
+                    id: gameId,
+                }
+            });
+
+            if(!game){
+                return response.status(400).send({
+                    message: "There's no game whit this gameId"
+                })
+            }
+
+            await prisma.game.update({
+                where: {
+                    id: gameId,
+                },
+                data: {
+                    firstTeamPointsFinalResult,
+                    secondTeamPointsFinalResult
+                }
+            })
+
+            return response.status(201).send()
+        }
+    );
 }
